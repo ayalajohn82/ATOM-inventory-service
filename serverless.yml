@@ -1,0 +1,14 @@
+service: atom-inventory
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: dev
+  region: us-west-1
+
+functions:
+  inventory:  
+    handler: inventory.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
