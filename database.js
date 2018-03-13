@@ -26,3 +26,23 @@ const createProduct = (productID, name, quantity) => {
     console.log({ productId, name,  quantity });
   });
 };
+
+const getProduct = (productId) => {
+  const params = {
+    TableName: PRODUCTS_TABLE,
+    Key: { productId },
+  };
+
+  dynamoDb.get(params, (error, result) => {
+    if (error) {
+      console.error({ error: 'Could not get product' });
+    }
+    if (result.Item) {
+      const {productId, name, quantity} = result.Item;
+      console.log({ productId, name, quantity });
+    } else {
+      console.error({ error: "User not found" });
+    }
+  });
+};
+
