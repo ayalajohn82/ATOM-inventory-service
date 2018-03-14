@@ -46,7 +46,7 @@ const getProduct = (productId) => {
   });
 };
 
-const updateProductQuantity = (productID) => {
+const updateProductQuantity = (productID, quantity) => {
   const params = {
     TableName: PRODUCTS_TABLE,
     Key: {
