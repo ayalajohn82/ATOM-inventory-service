@@ -10,4 +10,16 @@ app.get('/', (req, res) => {
   res.send('Init');
 });
 
+app.get('/products/:productId', (req, res) => {
+  res.send('get product endpoint');
+});
+
+app.post('/products', (req, res) => {
+  res.send('create product endpoint');
+});
+
+app.patch('/products/:productId', (req, res) => {
+  res.send('update quantity endpoint');
+});
+
 module.exports.handler = serverless(app);
