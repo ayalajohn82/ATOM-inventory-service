@@ -68,3 +68,5 @@ const updateProductQuantity = (productID) => {
     }
   });
 };
+
+module.export = { createProduct, getProduct, updateProductQuantity };
