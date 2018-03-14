@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const AWS = require('aws-sdk');
+const { createProduct, getProduct, updateProductQuantity } = require('./database');
 
 app.use(bodyParser.json({ strict: false }));
 
