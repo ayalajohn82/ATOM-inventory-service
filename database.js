@@ -46,3 +46,25 @@ const getProduct = (productId) => {
   });
 };
 
+const updateProductQuantity = (productID) => {
+  const params = {
+    TableName: PRODUCTS_TABLE,
+    Key: {
+      productId: req.params.productId,
+    },
+    UpdateExpression: 'set quantity = quantity - :val',
+    ConditionExpression: 'quantity >= :val',
+    ExpressionAttributeValues: {
+      ':val':req.body.quantity,
+    },
+    ReturnValues:"UPDATED_NEW"
+  };
+
+  dynamoDb.update(params, function(err, result) {
+    if (err) {
+        console.error({ error: "Unable to update item. Error JSON: " + err.message });
+    } else {
+        console.log(`Updated product ${req.params.productId}: ${result}`);
+    }
+  });
+};
