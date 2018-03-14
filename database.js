@@ -50,12 +50,12 @@ const updateProductQuantity = (productID) => {
   const params = {
     TableName: PRODUCTS_TABLE,
     Key: {
-      productId: req.params.productId,
+      productId: productId,
     },
     UpdateExpression: 'set quantity = quantity - :val',
     ConditionExpression: 'quantity >= :val',
     ExpressionAttributeValues: {
-      ':val':req.body.quantity,
+      ':val': quantity,
     },
     ReturnValues:"UPDATED_NEW"
   };
@@ -64,7 +64,7 @@ const updateProductQuantity = (productID) => {
     if (err) {
         console.error({ error: "Unable to update item. Error JSON: " + err.message });
     } else {
-        console.log(`Updated product ${req.params.productId}: ${result}`);
+        console.log(`Updated product ${productId}: ${result}`);
     }
   });
 };
