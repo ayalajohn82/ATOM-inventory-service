@@ -85,4 +85,4 @@ const bulkInsertProducts = (requests) => {
   });
 };
 
-module.export = { createProduct, getProduct, updateProductQuantity };
+module.export = { createProduct, getProduct, updateProductQuantity, bulkInsertProducts };

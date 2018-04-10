@@ -23,5 +23,4 @@ const generateProductData = (counter) => {
       generateProductData(counter);
     }
   });
-
 };
