@@ -46,12 +46,10 @@ const getProduct = (productId) => {
   });
 };
 
-const updateProductQuantity = (productID, quantity) => {
+const updateProductQuantity = (productId, quantity) => {
   const params = {
     TableName: PRODUCTS_TABLE,
-    Key: {
-      productId: productId,
-    },
+    Key: { productId },
     UpdateExpression: 'set quantity = quantity - :val',
     ConditionExpression: 'quantity >= :val',
     ExpressionAttributeValues: {
