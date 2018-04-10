@@ -12,14 +12,18 @@ app.get('/', (req, res) => {
 });
 
 app.get('/products/:productId', (req, res) => {
+  getProduct(req.params.productId);
   res.send('get product endpoint');
 });
 
 app.post('/products', (req, res) => {
+  const { productId, name, quantity } = req.body;
+  createProduct(productId, name, quantity);
   res.send('create product endpoint');
 });
 
 app.patch('/products/:productId', (req, res) => {
+  updateProductQuantity(req.params.productId, req.body.quantity);
   res.send('update quantity endpoint');
 });
 
