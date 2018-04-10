@@ -67,4 +67,32 @@ const updateProductQuantity = (productId, quantity) => {
   });
 };
 
+const bulkInsertProducts = (products) => {
+  const params = {
+    RequestItems: {}
+  };
+  params.RequestItems[PRODUCTS_TABLE] = [];
+  
+  for(let product of products) {
+    const {productId, name, quantity} = product;
+    const request = {
+      putRequest: {
+        Item: { productId, name, quantity }
+      }
+    };
+    params.RequestItems[PRODUCTS_TABLE].push(request);
+  }
+
+  dynamoDb.batchWriteItem(params, (response) => {
+    if(err) {
+      console.log(err);
+      return false;
+    } else if(response.unprocessedItems) {
+      bulkInsertProducts(response.unprocessedItems);
+    }
+    console.log('successfully added products');
+    return true;
+  });
+};
+
 module.export = { createProduct, getProduct, updateProductQuantity };
