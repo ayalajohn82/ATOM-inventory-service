@@ -67,21 +67,11 @@ const updateProductQuantity = (productId, quantity) => {
   });
 };
 
-const bulkInsertProducts = (products) => {
+const bulkInsertProducts = (requests) => {
   const params = {
     RequestItems: {}
   };
-  params.RequestItems[PRODUCTS_TABLE] = [];
-  
-  for(let product of products) {
-    const {productId, name, quantity} = product;
-    const request = {
-      putRequest: {
-        Item: { productId, name, quantity }
-      }
-    };
-    params.RequestItems[PRODUCTS_TABLE].push(request);
-  }
+  params.RequestItems[PRODUCTS_TABLE] = requests;
 
   dynamoDb.batchWriteItem(params, (response) => {
     if(err) {
